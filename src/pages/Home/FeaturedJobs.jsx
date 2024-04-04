@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import FeaturedCard from "./FeaturedCard";
 
 const FeaturedJobs = () => {
-    const [jobsData,setJobsData]=useState([])
-    useEffect(()=>{
+    const [jobsData, setJobsData] = useState([])
+    const [seeMore, SetSeeMore] = useState(4)
+
+    useEffect(() => {
         axios.get('./Jobs.json')
-        .then(data=>setJobsData(data.data))
-    },[])
+            .then(data => setJobsData(data.data))
+    }, [])
     console.log(jobsData)
     return (
         <div className="max-w-7xl mx-auto space-y-6">
@@ -18,9 +20,16 @@ const FeaturedJobs = () => {
             </div>
 
             <div className="grid lg:grid-cols-2 gap-12">
-             {
-                jobsData?.map((jobData,i)=><FeaturedCard key={i} jobData={jobData}/>)
-             }
+                {
+                    jobsData?.slice(0, seeMore).map((jobData, i) => <FeaturedCard key={i} jobData={jobData} />)
+                }
+            </div>
+            <div className="flex justify-center">
+
+                {
+                    seeMore > 4 ? '' :
+                <button className="btn btn-error text-white " onClick={() => SetSeeMore(jobsData.length)}>See More</button>
+                }
             </div>
         </div>
     );

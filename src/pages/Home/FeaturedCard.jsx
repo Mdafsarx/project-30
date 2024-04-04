@@ -1,10 +1,12 @@
 
 
-const FeaturedCard = ({jobData}) => {
-    const { logo, job_title, company_name, location, salary } = jobData || {};
+const FeaturedCard = ({ jobData }) => {
+    const { logo, job_title, company_name, location, salary, Aos } = jobData || {};
     return (
         <div>
-            <div className="card-compact  bg-base-100 shadow-xl p-6 space-y-4 rounded-2xl border-2 ">
+            <div className="card-compact  bg-base-100 shadow-xl p-6 space-y-4 rounded-2xl border-2 " data-aos={Aos} data-aos-duration="1000"     data-aos-delay="200"
+
+            >
 
                 <figure><img src={logo} alt="Shoes" className="h-24 w-32" /></figure>
 
